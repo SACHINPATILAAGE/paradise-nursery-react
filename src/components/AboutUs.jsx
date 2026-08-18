@@ -5,36 +5,39 @@ function AboutUs() {
     <>
       <Navbar />
 
-      <main className="about-page">
-        <section className="about-card">
-          <h1>About Paradise Nursery</h1>
+      <div className="about-us-container">
+        <h1>About Paradise Nursery</h1>
 
-          <p>
-            Paradise Nursery is an online plant shop dedicated to
-            bringing beautiful and healthy plants closer to nature
-            lovers.
-          </p>
+        <p>
+          Paradise Nursery is an online plant shop that provides
+          beautiful and healthy houseplants for homes, offices,
+          and gardens.
+        </p>
 
-          <p>
-            We offer a wide variety of indoor plants, succulents,
-            and outdoor plants suitable for homes, offices, and
-            gardens.
-          </p>
+        <p>
+          Our company offers a variety of indoor plants,
+          succulents, and outdoor plants at affordable prices.
+          We make it easy for customers to discover and purchase
+          plants for their living spaces.
+        </p>
 
-          <p>
-            Our goal is to make buying plants simple, convenient,
-            and enjoyable while helping people create greener
-            spaces.
-          </p>
+        <h2>Our Mission</h2>
 
-          <h2>Our Mission</h2>
+        <p>
+          Our mission is to make plant shopping simple and
+          convenient while encouraging people to create greener
+          and healthier environments.
+        </p>
 
-          <p>
-            Our mission is to encourage greener living by making
-            quality plants accessible to everyone.
-          </p>
-        </section>
-      </main>
+        <h2>Our Services</h2>
+
+        <p>
+          Paradise Nursery provides an easy-to-use online
+          shopping experience where customers can browse plants,
+          add products to their shopping cart, manage quantities,
+          and view their total purchase amount.
+        </p>
+      </div>
     </>
   );
 }
