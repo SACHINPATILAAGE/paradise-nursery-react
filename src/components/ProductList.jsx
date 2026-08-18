@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 const plants = [
   // =========================
-  // INDOOR PLANTS
+  // INDOOR PLANTS - 6
   // =========================
   {
     id: 1,
@@ -56,7 +56,7 @@ const plants = [
   },
 
   // =========================
-  // SUCCULENTS
+  // SUCCULENTS - 6
   // =========================
   {
     id: 7,
@@ -108,7 +108,7 @@ const plants = [
   },
 
   // =========================
-  // OUTDOOR PLANTS
+  // OUTDOOR PLANTS - 6
   // =========================
   {
     id: 13,
@@ -163,37 +163,59 @@ const plants = [
 function ProductList() {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector(
+    (state) => state.cart.items
+  );
 
+  // Create three categories
   const categories = [
-    ...new Set(plants.map((plant) => plant.category)),
+    ...new Set(
+      plants.map((plant) => plant.category)
+    ),
   ];
 
+  // Check whether a plant is already in cart
   const isInCart = (plantId) => {
-    return cartItems.some((item) => item.id === plantId);
+    return cartItems.some(
+      (item) => item.id === plantId
+    );
   };
 
   return (
-    <>
+    <div className="product-list-container">
+      {/* Navbar appears on Product Listing page */}
       <Navbar />
 
       <main className="products-page">
         <section className="products-header">
-          <h1>Our Plants</h1>
+          <h1>Paradise Nursery Plants</h1>
+
           <p>
-            Discover beautiful plants for your home and garden.
+            Explore our collection of beautiful plants
+            for your home and garden.
           </p>
         </section>
 
+        {/* Display all categories */}
         {categories.map((category) => (
-          <section className="plant-category" key={category}>
+          <section
+            className="plant-category"
+            key={category}
+          >
             <h2>{category}</h2>
 
             <div className="plant-grid">
               {plants
-                .filter((plant) => plant.category === category)
+                .filter(
+                  (plant) =>
+                    plant.category === category
+                )
                 .map((plant) => (
-                  <article className="plant-card" key={plant.id}>
+                  <article
+                    className="plant-card"
+                    key={plant.id}
+                  >
+                    {/* Plant thumbnail */}
                     <img
                       src={plant.image}
                       alt={plant.name}
@@ -201,12 +223,15 @@ function ProductList() {
                     />
 
                     <div className="plant-info">
+                      {/* Plant name */}
                       <h3>{plant.name}</h3>
 
+                      {/* Plant price */}
                       <p className="plant-price">
                         ₹{plant.price}
                       </p>
 
+                      {/* Add to Cart */}
                       <button
                         className="add-cart-button"
                         disabled={isInCart(plant.id)}
@@ -225,7 +250,7 @@ function ProductList() {
           </section>
         ))}
       </main>
-    </>
+    </div>
   );
 }
 
