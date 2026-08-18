@@ -1,4 +1,5 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import ProductList from "./components/ProductList";
 import CartItem from "./components/CartItem";
@@ -7,30 +8,38 @@ import AboutUs from "./components/AboutUs";
 import "./App.css";
 
 function Home() {
-  const navigate = useNavigate();
+  const [showProductList, setShowProductList] = useState(false);
+
+  if (showProductList) {
+    return <ProductList />;
+  }
 
   return (
     <main className="home-page">
-      <div className="home-overlay">
-        <section className="home-content">
-          <div className="home-badge">
-            🌿 Welcome to Paradise Nursery
-          </div>
+      <div className="background-image">
+        <div className="home-overlay">
+          <section className="home-content">
 
-          <h1>Paradise Nursery</h1>
+            <div className="home-badge">
+              🌿 Welcome to Paradise Nursery
+            </div>
 
-          <p>
-            Bring nature into your home with beautiful, healthy,
-            and carefully selected plants.
-          </p>
+            <h1>Paradise Nursery</h1>
 
-          <button
-            className="get-started-button"
-            onClick={() => navigate("/plants")}
-          >
-            Get Started
-          </button>
-        </section>
+            <p>
+              Bring nature into your home with beautiful,
+              healthy, and carefully selected plants.
+            </p>
+
+            <button
+              className="get-started-button"
+              onClick={() => setShowProductList(true)}
+            >
+              Get Started
+            </button>
+
+          </section>
+        </div>
       </div>
     </main>
   );
@@ -41,11 +50,20 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
 
-      <Route path="/plants" element={<ProductList />} />
+      <Route
+        path="/plants"
+        element={<ProductList />}
+      />
 
-      <Route path="/cart" element={<CartItem />} />
+      <Route
+        path="/cart"
+        element={<CartItem />}
+      />
 
-      <Route path="/about" element={<AboutUs />} />
+      <Route
+        path="/about"
+        element={<AboutUs />}
+      />
     </Routes>
   );
 }
