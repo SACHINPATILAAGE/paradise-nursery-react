@@ -11,47 +11,60 @@ import Navbar from "./Navbar";
 function CartItem() {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector(
+    (state) => state.cart.items
+  );
 
-  // Calculate total cart amount
+  // Calculate total amount of the complete cart
   const totalAmount = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) =>
+      total + item.price * item.quantity,
     0
   );
 
-  // Calculate total number of items
+  // Calculate total quantity of products
   const totalItems = cartItems.reduce(
-    (total, item) => total + item.quantity,
+    (total, item) =>
+      total + item.quantity,
     0
   );
 
-  // Checkout message
+  // Checkout button
   const handleCheckout = () => {
     alert("Coming Soon!");
   };
 
   return (
-    <>
+    <div className="cart-page-container">
+      {/* Navbar appears on Cart page */}
       <Navbar />
 
       <main className="cart-page">
         <div className="cart-container">
 
-          {/* Cart Heading */}
+          {/* Page Heading */}
           <div className="cart-heading">
             <h1>Shopping Cart</h1>
+
             <p>
-              Review your selected plants before checkout.
+              Review your selected plants before
+              checkout.
             </p>
           </div>
 
-          {/* Empty Cart */}
+          {/* =========================
+              EMPTY CART
+          ========================= */}
+
           {cartItems.length === 0 ? (
             <div className="empty-cart">
-              <h2>Your cart is empty 🌱</h2>
+              <h2>
+                Your cart is empty 🌱
+              </h2>
 
               <p>
-                Add some beautiful plants to your shopping cart.
+                Add some beautiful plants
+                to your shopping cart.
               </p>
 
               <Link
@@ -63,12 +76,18 @@ function CartItem() {
             </div>
           ) : (
             <>
-              {/* Cart Items */}
+              {/* =========================
+                  CART ITEMS
+              ========================= */}
+
               <div className="cart-items">
 
                 {cartItems.map((item) => {
+
+                  // Calculate individual item total
                   const itemTotal =
-                    item.price * item.quantity;
+                    item.price *
+                    item.quantity;
 
                   return (
                     <div
@@ -76,40 +95,52 @@ function CartItem() {
                       key={item.id}
                     >
 
-                      {/* Plant Image */}
+                      {/* Plant Thumbnail */}
                       <img
                         src={item.image}
                         alt={item.name}
                         className="cart-item-image"
                       />
 
-                      {/* Plant Details */}
+                      {/* Plant Information */}
                       <div className="cart-item-details">
-                        <h2>{item.name}</h2>
+
+                        <h2>
+                          {item.name}
+                        </h2>
 
                         <p>
-                          Unit Price: ₹{item.price}
+                          Unit Price: ₹
+                          {item.price}
                         </p>
 
                         <p className="item-total">
-                          Total: ₹{itemTotal}
+                          Total: ₹
+                          {itemTotal}
                         </p>
+
                       </div>
 
-                      {/* Quantity Controls */}
+                      {/* =========================
+                          QUANTITY
+                      ========================= */}
+
                       <div className="quantity-section">
+
                         <p>Quantity</p>
 
                         <div className="quantity-controls">
 
                           {/* Decrease */}
                           <button
+                            className="quantity-decrease"
                             onClick={() =>
                               dispatch(
                                 updateQuantity({
                                   id: item.id,
                                   quantity:
-                                    item.quantity - 1,
+                                    item.quantity -
+                                    1,
                                 })
                               )
                             }
@@ -117,18 +148,21 @@ function CartItem() {
                             −
                           </button>
 
-                          <span>
+                          {/* Current Quantity */}
+                          <span className="quantity-value">
                             {item.quantity}
                           </span>
 
                           {/* Increase */}
                           <button
+                            className="quantity-increase"
                             onClick={() =>
                               dispatch(
                                 updateQuantity({
                                   id: item.id,
                                   quantity:
-                                    item.quantity + 1,
+                                    item.quantity +
+                                    1,
                                 })
                               )
                             }
@@ -139,7 +173,10 @@ function CartItem() {
                         </div>
                       </div>
 
-                      {/* Delete */}
+                      {/* =========================
+                          DELETE
+                      ========================= */}
+
                       <button
                         className="delete-button"
                         onClick={() =>
@@ -157,26 +194,46 @@ function CartItem() {
 
               </div>
 
-              {/* Cart Summary */}
+              {/* =========================
+                  CART SUMMARY
+              ========================= */}
+
               <div className="cart-summary">
 
-                <h2>Cart Summary</h2>
+                <h2>
+                  Cart Summary
+                </h2>
 
+                {/* Total Items */}
                 <div className="summary-row">
-                  <span>Total Items:</span>
 
-                  <span>{totalItems}</span>
+                  <span>
+                    Total Items:
+                  </span>
+
+                  <span>
+                    {totalItems}
+                  </span>
+
                 </div>
 
+                {/* Total Amount */}
                 <div className="summary-row total-row">
-                  <span>Total Amount:</span>
+
+                  <span>
+                    Total Amount:
+                  </span>
 
                   <span>
                     ₹{totalAmount}
                   </span>
+
                 </div>
 
-                {/* Checkout */}
+                {/* =========================
+                    CHECKOUT
+                ========================= */}
+
                 <button
                   className="checkout-button"
                   onClick={handleCheckout}
@@ -184,7 +241,10 @@ function CartItem() {
                   Checkout
                 </button>
 
-                {/* Continue Shopping */}
+                {/* =========================
+                    CONTINUE SHOPPING
+                ========================= */}
+
                 <Link
                   to="/plants"
                   className="continue-shopping"
@@ -198,7 +258,7 @@ function CartItem() {
 
         </div>
       </main>
-    </>
+    </div>
   );
 }
 
